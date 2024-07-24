@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SaleSistemMvc.Data;
 using SaleSistemMvc.Models;
@@ -11,6 +7,7 @@ using SaleSistemMvc.Models;
 namespace SaleSistemMvc.Controllers
 {
     [Route("usuarios")]
+    [Authorize]
     public class UserAccountsController : Controller
     {
         private readonly ApplicationDbContext _context;

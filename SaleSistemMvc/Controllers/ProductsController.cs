@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SaleSistemMvc.Data;
 using SaleSistemMvc.Models;
@@ -11,6 +7,7 @@ using SaleSistemMvc.Models;
 namespace SaleSistemMvc.Controllers
 {
     [Route("produtos")]
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,12 +17,14 @@ namespace SaleSistemMvc.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Product.ToListAsync());
         }
 
         [HttpGet("{id:int}/detalhes")]
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

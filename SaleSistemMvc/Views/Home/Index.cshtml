@@ -1,8 +1,50 @@
-﻿@{
+﻿@model IEnumerable<SaleSistemMvc.Models.Product>
+
+@{
     ViewData["Title"] = "Home Page";
+
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Bem-Vindo!</h1>
+    <h3 class="display-6">Dê uma olhada no nossos produtos!</h3>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                        @Html.DisplayFor(modelItem => item.Price)
+                </td>
+               <td>
+                   @Html.DisplayFor(modelItem => item.Price)
+               </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="Sales" asp-action="create" asp-route-id="@item.Id">Buy</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    </table>
+
 </div>
