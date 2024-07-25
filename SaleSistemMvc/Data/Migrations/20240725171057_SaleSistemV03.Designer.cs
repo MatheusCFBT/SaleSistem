@@ -12,8 +12,8 @@ using SaleSistemMvc.Data;
 namespace SaleSistemMvc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240724150418_SaleSisteV03")]
-    partial class SaleSisteV03
+    [Migration("20240725171057_SaleSistemV03")]
+    partial class SaleSistemV03
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -249,12 +249,7 @@ namespace SaleSistemMvc.Data.Migrations
                         .IsRequired()
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("SaleId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("SaleId");
 
                     b.ToTable("Product");
                 });
@@ -270,12 +265,17 @@ namespace SaleSistemMvc.Data.Migrations
                     b.Property<int>("BuyerId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("Date")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductBuyedId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BuyerId");
+
+                    b.HasIndex("ProductBuyedId");
 
                     b.ToTable("Sale");
                 });
@@ -364,13 +364,6 @@ namespace SaleSistemMvc.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SaleSistemMvc.Models.Product", b =>
-                {
-                    b.HasOne("SaleSistemMvc.Models.Sale", null)
-                        .WithMany("ProductsBuyed")
-                        .HasForeignKey("SaleId");
-                });
-
             modelBuilder.Entity("SaleSistemMvc.Models.Sale", b =>
                 {
                     b.HasOne("SaleSistemMvc.Models.UserAccount", "Buyer")
@@ -379,12 +372,15 @@ namespace SaleSistemMvc.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Buyer");
-                });
+                    b.HasOne("SaleSistemMvc.Models.Product", "ProductBuyed")
+                        .WithMany()
+                        .HasForeignKey("ProductBuyedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("SaleSistemMvc.Models.Sale", b =>
-                {
-                    b.Navigation("ProductsBuyed");
+                    b.Navigation("Buyer");
+
+                    b.Navigation("ProductBuyed");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,12 +8,15 @@ namespace SaleSistemMvc.Models
         public int Id { get; set; }
 
         [Required]
+        [Display(Name ="Comprador")]
         public UserAccount? Buyer { get; set; }
 
         [Required]
-        public DateOnly Date { get; set; }
+        [Display(Name ="Data da compra")]
+        public DateTime Date { get; set; }
 
         [Required]
-        public List<Product>? ProductsBuyed { get; set; }
+        [Display(Name = "Produto")]
+        public Product? ProductBuyed { get; set; }
     }
 }

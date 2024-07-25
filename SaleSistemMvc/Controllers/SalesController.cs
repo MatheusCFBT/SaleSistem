@@ -43,13 +43,13 @@ namespace SaleSistemMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Date")] Sale sale)
+        public async Task<IActionResult> Create([Bind("Id,Buyer,Date,ProductBuyed")] Sale sale)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(sale);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details));
             }
             return View(sale);
         }
