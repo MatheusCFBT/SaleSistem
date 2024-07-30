@@ -17,6 +17,10 @@ html {
   min-height: 100%;
 }
 
+.form-group {
+    padding-bottom: 2%;
+}
+
 body {
   margin-bottom: 60px;
 }

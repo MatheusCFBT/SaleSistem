@@ -23,7 +23,7 @@ namespace SaleSistemMvc.Controllers
             return View(await _context.Sale.ToListAsync());
         }
 
-        [Route("{id:int}/detalhes-da-compra")]
+        [Route("{id:int}/detalhes")]
         public async Task<IActionResult> Details(int id)
         {
             var sale = await _context.Sale

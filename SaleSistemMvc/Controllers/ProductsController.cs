@@ -42,13 +42,13 @@ namespace SaleSistemMvc.Controllers
             return View(product);
         }
 
-        [HttpGet("adicionar-novo-produto")]
+        [HttpGet("adicionar")]
         public IActionResult Create()
         {
             return View();
         }
 
-        [HttpPost("adicionar-novo-produto")]
+        [HttpPost("adicionar")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,Price")] Product product)
         {

@@ -35,13 +35,13 @@ namespace SaleSistemMvc.Controllers
             return View(userAccount);
         }
 
-        [HttpGet("criar-conta")]
+        [HttpGet("criar")]
         public IActionResult Create()
         {
             return View();
         }
 
-        [HttpPost("criar-conta")]
+        [HttpPost("criar")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,BirthDate,Email,Phone,PostalCode")] UserAccount userAccount)
         {
@@ -97,7 +97,7 @@ namespace SaleSistemMvc.Controllers
             return View(userAccount);
         }
 
-        [HttpGet("{id:int}/apagar-conta")]
+        [HttpGet("{id:int}/apagar")]
         public async Task<IActionResult> Delete(int id)
         {
             var userAccount = await _context.UserAccount
@@ -110,7 +110,7 @@ namespace SaleSistemMvc.Controllers
             return View(userAccount);
         }
 
-        [HttpPost("{id:int}/apagar-conta"), ActionName("Delete")]
+        [HttpPost("{id:int}/apagar"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
